@@ -83,8 +83,7 @@ public class FileUtils {
     }
 
     public static String writeSoundBytesToFile(byte[] bytes) {
-        String timestamp = LocalDateTime.now()
-                .format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss"));
+        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss"));
         String fileName = String.format("audio_%s.mp3", timestamp);
         return writeSoundBytesToGivenFile(bytes, fileName);
     }

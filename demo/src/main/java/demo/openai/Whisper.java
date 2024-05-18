@@ -12,7 +12,6 @@ import org.apache.hc.core5.http.ContentType;
 import org.apache.hc.core5.http.HttpEntity;
 import org.apache.hc.core5.http.io.entity.EntityUtils;
 import org.apache.hc.core5.http.message.StatusLine;
-import org.apache.xmlbeans.impl.jam.annotation.WhitespaceDelimitedTagParser;
 
 import java.io.File;
 import java.io.IOException;
@@ -99,10 +98,6 @@ public class Whisper {
         FileUtils.writeTextToFile(transcription,
                 fileNameWithoutPath.replace(".wav", ".txt"));
         return transcription;
-    }
-
-    public static void main(String[] args) {
-        transcribe("recording1.wav");
     }
 }
 
