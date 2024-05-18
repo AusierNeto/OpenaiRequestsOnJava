@@ -1,6 +1,7 @@
 package demo.openai;
 
 import utilities.FileUtils;
+
 import org.apache.hc.client5.http.classic.methods.HttpPost;
 import org.apache.hc.client5.http.entity.mime.FileBody;
 import org.apache.hc.client5.http.entity.mime.MultipartEntityBuilder;
@@ -11,6 +12,8 @@ import org.apache.hc.core5.http.ContentType;
 import org.apache.hc.core5.http.HttpEntity;
 import org.apache.hc.core5.http.io.entity.EntityUtils;
 import org.apache.hc.core5.http.message.StatusLine;
+import org.apache.xmlbeans.impl.jam.annotation.WhitespaceDelimitedTagParser;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.UncheckedIOException;
@@ -35,9 +38,9 @@ public class Whisper {
                     "assertThrows", "assertTrue", "assertEquals", "assertNull", "assertNotNull", "assertThat",
                     "Tales from the jar side", "Spring Boot", "Spring Framework", "Spring Data", "Spring Security"));
 
-    private String transcribeChunk(String prompt, File chunkFile) {
+    private static String transcribeChunk(String prompt, File chunkFile) {
         System.out.printf("Transcribing %s%n", chunkFile.getName());
-
+        
         try (CloseableHttpClient client = HttpClients.createDefault()) {
             HttpPost httpPost = new HttpPost(URL);
             httpPost.setHeader("Authorization", "Bearer %s".formatted(KEY));
@@ -60,7 +63,7 @@ public class Whisper {
         }
     }
 
-    public String transcribe(String fileName) {
+    public static String transcribe(String fileName) {
         System.out.println("Transcribing " + fileName);
         File file = new File(fileName);
 
@@ -96,6 +99,10 @@ public class Whisper {
         FileUtils.writeTextToFile(transcription,
                 fileNameWithoutPath.replace(".wav", ".txt"));
         return transcription;
+    }
+
+    public static void main(String[] args) {
+        transcribe("recording1.wav");
     }
 }
 
